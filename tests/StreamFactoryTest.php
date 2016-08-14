@@ -22,36 +22,21 @@ class StreamFactoryTest extends TestCase
 
     public function testCreateStream()
     {
-        $stream = $this->factory->createStream();
-
-        $this->assertStream($stream, '');
-    }
-
-    public function testCreateStreamFromCallback()
-    {
-        $callback = function () {
-            return 'i am a teapot';
-        };
-
-        $stream = $this->factory->createStreamFromCallback($callback);
-
-        $this->assertStream($stream, $callback());
-    }
-
-    public function testCreateStreamFromResource()
-    {
         $resource = tmpfile();
 
-        $stream = $this->factory->createStreamFromResource($resource);
+        $stream = $this->factory->createStream($resource);
 
         $this->assertStream($stream, '');
     }
 
-    public function testCreateStreamFromString()
+    public function testCreateStreamWithContent()
     {
         $string = 'would you like some crumpets?';
 
-        $stream = $this->factory->createStreamFromString($string);
+        $resource = tmpfile();
+        fwrite($resource, $string);
+
+        $stream = $this->factory->createStream($resource);
 
         $this->assertStream($stream, $string);
     }
