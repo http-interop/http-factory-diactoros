@@ -1,8 +1,17 @@
 {
-    "repositories": [
+    "name": "http-interop/http-factory-diactoros",
+    "description": "An HTTP Factory using Zend Diactoros",
+    "keywords": [
+        "psr-7",
+        "psr-17",
+        "http",
+        "factory"
+    ],
+    "license": "MIT",
+    "authors": [
         {
-            "type": "git",
-            "url": "https://github.com/http-interop/http-factory.git"
+            "name": "PHP-FIG",
+            "homepage": "http://www.php-fig.org/"
         }
     ],
     "require": {
@@ -18,5 +27,11 @@
         "psr-4": {
             "Http\\Factory\\Diactoros\\": "tests/"
         }
-    }
+    },
+    "repositories": [
+        {
+            "type": "git",
+            "url": "https://github.com/http-interop/http-factory.git"
+        }
+    ]
 }
