@@ -2,7 +2,7 @@
 
 namespace Http\Factory\Diactoros;
 
-use Psr\Http\Factory\UploadedFileFactoryInterface;
+use Interop\Http\Factory\UploadedFileFactoryInterface;
 use Zend\Diactoros\UploadedFile;
 
 class UploadedFileFactory implements UploadedFileFactoryInterface

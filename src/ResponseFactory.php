@@ -2,7 +2,7 @@
 
 namespace Http\Factory\Diactoros;
 
-use Psr\Http\Factory\ResponseFactoryInterface;
+use Interop\Http\Factory\ResponseFactoryInterface;
 use Zend\Diactoros\Response;
 
 class ResponseFactory implements ResponseFactoryInterface
