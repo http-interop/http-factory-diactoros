@@ -11,12 +11,7 @@ class ServerRequestFactory implements ServerRequestFactoryInterface, ServerReque
 {
     public function createServerRequest($method, $uri)
     {
-        if (is_string($uri)) {
-            return new ServerRequest([], [], $uri, $method);
-        }
-
-        return (new ServerRequest([], [], null, $method))
-            ->withUri($uri);
+        return new ServerRequest([], [], $uri, $method);
     }
 
     public function createServerRequestFromGlobals()
