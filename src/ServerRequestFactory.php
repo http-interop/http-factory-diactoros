@@ -5,14 +5,22 @@ namespace Http\Factory\Diactoros;
 use Http\Factory\Diactoros\UriFactory;
 use Interop\Http\Factory\ServerRequestFactoryInterface;
 use Psr\Http\Message\UriInterface;
+use Zend\Diactoros\ServerRequest;
 use Zend\Diactoros\ServerRequestFactory as DiactorosServerRequestFactory;
 
-class ServerRequestFactory implements
-    ServerRequestFactoryInterface
+class ServerRequestFactory implements ServerRequestFactoryInterface
 {
     public function createServerRequest(array $server, $method = null, $uri = null)
     {
-        $request = DiactorosServerRequestFactory::fromGlobals($server);
+        $normalizedServer = DiactorosServerRequestFactory::normalizeServer($server);
+        $headers = DiactorosServerRequestFactory::marshalHeaders($server);
+
+        $request = new ServerRequest(
+            $normalizedServer,
+            [],
+            DiactorosServerRequestFactory::marshalUriFromServer($normalizedServer, $headers),
+            DiactorosServerRequestFactory::get('REQUEST_METHOD', $server, 'GET')
+        );
 
         if (null !== $method) {
             $request = $request->withMethod($method);
