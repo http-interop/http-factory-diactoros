@@ -10,7 +10,20 @@ use Zend\Diactoros\ServerRequestFactory as DiactorosServerRequestFactory;
 
 class ServerRequestFactory implements ServerRequestFactoryInterface
 {
-    public function createServerRequest(array $server, $method = null, $uri = null)
+    public function createServerRequest($method, $uri)
+    {
+        $serverParams = [];
+        $uploadedFiles = [];
+
+        return new ServerRequest(
+            $serverParams,
+            $uploadedFiles,
+            $uri,
+            $method
+        );
+    }
+
+    public function createServerRequestFromArray(array $server)
     {
         $normalizedServer = DiactorosServerRequestFactory::normalizeServer($server);
         $headers = DiactorosServerRequestFactory::marshalHeaders($server);
@@ -21,18 +34,6 @@ class ServerRequestFactory implements ServerRequestFactoryInterface
             DiactorosServerRequestFactory::marshalUriFromServer($normalizedServer, $headers),
             DiactorosServerRequestFactory::get('REQUEST_METHOD', $server, 'GET')
         );
-
-        if (null !== $method) {
-            $request = $request->withMethod($method);
-        }
-
-        if (null !== $uri) {
-            if (!$uri instanceof UriInterface) {
-                $uri = (new UriFactory())->createUri($uri);
-            }
-
-            $request = $request->withUri($uri);
-        }
 
         return $request;
     }
