@@ -9,7 +9,6 @@ class ResponseFactory implements ResponseFactoryInterface
 {
     public function createResponse($code = 200)
     {
-        return (new Response())
-            ->withStatus($code);
+        return new Response('php://memory', $code);
     }
 }
