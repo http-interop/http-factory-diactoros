@@ -4,15 +4,15 @@ namespace Http\Factory\Diactoros;
 
 use Http\Factory\Diactoros\UriFactory;
 use Interop\Http\Factory\ServerRequestFactoryInterface;
+use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Message\UriInterface;
 use Zend\Diactoros\ServerRequest;
 use Zend\Diactoros\ServerRequestFactory as DiactorosServerRequestFactory;
 
 class ServerRequestFactory implements ServerRequestFactoryInterface
 {
-    public function createServerRequest($method, $uri)
+    public function createServerRequest(string $method, $uri, array $serverParams = []): ServerRequestInterface
     {
-        $serverParams = [];
         $uploadedFiles = [];
 
         return new ServerRequest(
@@ -21,20 +21,5 @@ class ServerRequestFactory implements ServerRequestFactoryInterface
             $uri,
             $method
         );
-    }
-
-    public function createServerRequestFromArray(array $server)
-    {
-        $normalizedServer = DiactorosServerRequestFactory::normalizeServer($server);
-        $headers = DiactorosServerRequestFactory::marshalHeaders($server);
-
-        $request = new ServerRequest(
-            $normalizedServer,
-            [],
-            DiactorosServerRequestFactory::marshalUriFromServer($normalizedServer, $headers),
-            DiactorosServerRequestFactory::get('REQUEST_METHOD', $server, 'GET')
-        );
-
-        return $request;
     }
 }

@@ -3,26 +3,23 @@
 namespace Http\Factory\Diactoros;
 
 use Interop\Http\Factory\UploadedFileFactoryInterface;
+use Psr\Http\Message\StreamInterface;
+use Psr\Http\Message\UploadedFileInterface;
 use Zend\Diactoros\UploadedFile;
 
 class UploadedFileFactory implements UploadedFileFactoryInterface
 {
     public function createUploadedFile(
-        $file,
-        $size = null,
-        $error = \UPLOAD_ERR_OK,
-        $clientFilename = null,
-        $clientMediaType = null
-    ) {
+        StreamInterface $stream,
+        int $size = null,
+        int $error = \UPLOAD_ERR_OK,
+        string $clientFilename = null,
+        string $clientMediaType = null
+    ): UploadedFileInterface {
         if ($size === null) {
-            if (is_string($file)) {
-                $size = filesize($file);
-            } else {
-                $stats = fstat($file);
-                $size = $stats['size'];
-            }
+            $size = $stream->getSize();
         }
 
-        return new UploadedFile($file, $size, $error, $clientFilename, $clientMediaType);
+        return new UploadedFile($stream, $size, $error, $clientFilename, $clientMediaType);
     }
 }
