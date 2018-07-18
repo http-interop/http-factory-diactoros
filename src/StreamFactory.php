@@ -17,7 +17,7 @@ class StreamFactory implements StreamFactoryInterface
         return $this->createStreamFromResource($resource);
     }
 
-    public function createStreamFromFile(string $file, string$mode = 'r'): StreamInterface
+    public function createStreamFromFile(string $file, string $mode = 'r'): StreamInterface
     {
         $resource = fopen($file, $mode);
 
