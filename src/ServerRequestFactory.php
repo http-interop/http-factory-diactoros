@@ -3,7 +3,7 @@
 namespace Http\Factory\Diactoros;
 
 use Http\Factory\Diactoros\UriFactory;
-use Interop\Http\Factory\ServerRequestFactoryInterface;
+use Psr\Http\Message\ServerRequestFactoryInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Message\UriInterface;
 use Zend\Diactoros\ServerRequest;

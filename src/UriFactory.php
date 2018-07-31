@@ -2,7 +2,7 @@
 
 namespace Http\Factory\Diactoros;
 
-use Interop\Http\Factory\UriFactoryInterface;
+use Psr\Http\Message\UriFactoryInterface;
 use Psr\Http\Message\UriInterface;
 use Zend\Diactoros\Uri;
 

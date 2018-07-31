@@ -2,7 +2,7 @@
 
 namespace Http\Factory\Diactoros;
 
-use Interop\Http\Factory\StreamFactoryInterface;
+use Psr\Http\Message\StreamFactoryInterface;
 use Psr\Http\Message\StreamInterface;
 use Zend\Diactoros\Stream;
 
