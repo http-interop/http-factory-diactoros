@@ -2,9 +2,8 @@
 
 namespace Http\Factory\Diactoros;
 
-use Interop\Http\Factory\RequestFactoryInterface;
+use Psr\Http\Message\RequestFactoryInterface;
 use Psr\Http\Message\RequestInterface;
-use Psr\Http\Message\UriInterface;
 use Zend\Diactoros\Request;
 
 class RequestFactory implements RequestFactoryInterface
